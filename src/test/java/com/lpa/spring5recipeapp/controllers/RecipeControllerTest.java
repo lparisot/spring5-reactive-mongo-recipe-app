@@ -5,7 +5,6 @@ import com.lpa.spring5recipeapp.domain.Recipe;
 import com.lpa.spring5recipeapp.exceptions.NotFoundException;
 import com.lpa.spring5recipeapp.services.RecipeService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -132,14 +131,5 @@ public class RecipeControllerTest {
                 get("/recipe/1/show"))
                     .andExpect(status().isNotFound())
                     .andExpect(view().name("error/404error"));
-    }
-
-    @Ignore
-    @Test
-    public void testGetRecipeBadRequest() throws Exception {
-        mockMvc.perform(
-                get("/recipe/A/show"))
-                .andExpect(status().isBadRequest())
-                .andExpect(view().name("error/400error"));
     }
 }
