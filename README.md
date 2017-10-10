@@ -12,6 +12,8 @@ Add dependency:
 
 Add plugin
     In preferences/plugin, add lombok
+
+In Preferences, Build/Compiler/Annotation processors, enable annotation processing
 ```
 
 ### Automatic reload when code modification
