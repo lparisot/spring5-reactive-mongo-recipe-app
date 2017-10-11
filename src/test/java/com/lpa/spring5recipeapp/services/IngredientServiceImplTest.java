@@ -8,6 +8,7 @@ import com.lpa.spring5recipeapp.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.lpa.spring5recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.lpa.spring5recipeapp.domain.Ingredient;
 import com.lpa.spring5recipeapp.domain.Recipe;
+import com.lpa.spring5recipeapp.domain.UnitOfMeasure;
 import com.lpa.spring5recipeapp.repositories.RecipeRepository;
 import com.lpa.spring5recipeapp.repositories.reactive.RecipeReactiveRepository;
 import com.lpa.spring5recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
@@ -78,17 +79,21 @@ public class IngredientServiceImplTest {
     @Test
     public void testSaveRecipeCommand() throws Exception {
         //given
+        UnitOfMeasure uom = new UnitOfMeasure();
+        uom.setId("1234");
+        uom.setDescription("Desc");
+
         IngredientCommand command = new IngredientCommand();
         command.setId("3");
         command.setRecipeId("2");
-        command.setUnitOfMeasure(new UnitOfMeasureCommand());
-        command.getUnitOfMeasure().setId("1234");
+        command.setUnitOfMeasure(new UnitOfMeasureToUnitOfMeasureCommand().convert(uom));
 
         Recipe savedRecipe = new Recipe();
         savedRecipe.setId("2");
         savedRecipe.addIngredient(new Ingredient());
         savedRecipe.getIngredients().iterator().next().setId("3");
 
+        when(unitOfMeasureReactiveRepository.findById(anyString())).thenReturn(Mono.just(uom));
         when(recipeReactiveRepository.findById(anyString())).thenReturn(Mono.just(new Recipe()));
         when(recipeReactiveRepository.save(any())).thenReturn(Mono.just(savedRecipe));
 
