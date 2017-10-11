@@ -80,12 +80,12 @@ public class IngredientController {
         //need to return back parent id for hidden form property
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setRecipeId(recipeId);
-        model.addAttribute("ingredient", ingredientCommand);
-
         //init uom
         ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
 
-        model.addAttribute("uoms",  unitOfMeasureService.listAllUoms().collectList().block());
+        model.addAttribute("ingredient", ingredientCommand);
+
+        model.addAttribute("uoms", unitOfMeasureService.listAllUoms().collectList().block());
 
         return "recipe/ingredient/ingredientform";
     }
