@@ -83,7 +83,7 @@ public class IngredientServiceImpl implements IngredientService {
                 recipe.addIngredient(ingredient);
             }
 
-            Recipe savedRecipe = recipeRepository.save(recipe); //recipeReactiveRepository.save(recipe).block();
+            Recipe savedRecipe = recipeReactiveRepository.save(recipe).block();
 
             Optional<Ingredient> savedIngredientOptional = savedRecipe.getIngredients().stream()
                     .filter(recipeIngredients -> recipeIngredients.getId().equals(command.getId()))

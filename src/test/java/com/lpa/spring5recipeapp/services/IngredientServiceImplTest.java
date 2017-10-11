@@ -1,6 +1,7 @@
 package com.lpa.spring5recipeapp.services;
 
 import com.lpa.spring5recipeapp.commands.IngredientCommand;
+import com.lpa.spring5recipeapp.commands.UnitOfMeasureCommand;
 import com.lpa.spring5recipeapp.converters.IngredientCommandToIngredient;
 import com.lpa.spring5recipeapp.converters.IngredientToIngredientCommand;
 import com.lpa.spring5recipeapp.converters.UnitOfMeasureCommandToUnitOfMeasure;
@@ -85,10 +86,13 @@ public class IngredientServiceImplTest {
         IngredientCommand command = new IngredientCommand();
         command.setId("3");
         command.setRecipeId("2");
+        command.setUnitOfMeasure(new UnitOfMeasureCommand());
+        command.getUnitOfMeasure().setId("1234");
 
         Optional<Recipe> recipeOptional = Optional.of(new Recipe());
 
         Recipe savedRecipe = new Recipe();
+        savedRecipe.setId("2");
         savedRecipe.addIngredient(new Ingredient());
         savedRecipe.getIngredients().iterator().next().setId("3");
 
