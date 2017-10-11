@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -64,8 +63,8 @@ public class IndexControllerTest {
 
         // check with the inner data of the model instance
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
-        List<Recipe> setInController = argumentCaptor.getValue();
-        assertEquals(2, setInController.size());
+        List<Recipe> listInController = argumentCaptor.getValue();
+        assertEquals(2, listInController.size());
     }
 
     @Test

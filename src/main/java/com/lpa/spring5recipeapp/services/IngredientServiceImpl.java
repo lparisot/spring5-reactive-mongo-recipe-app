@@ -5,7 +5,6 @@ import com.lpa.spring5recipeapp.converters.IngredientCommandToIngredient;
 import com.lpa.spring5recipeapp.converters.IngredientToIngredientCommand;
 import com.lpa.spring5recipeapp.domain.Ingredient;
 import com.lpa.spring5recipeapp.domain.Recipe;
-import com.lpa.spring5recipeapp.repositories.RecipeRepository;
 import com.lpa.spring5recipeapp.repositories.reactive.RecipeReactiveRepository;
 import com.lpa.spring5recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;

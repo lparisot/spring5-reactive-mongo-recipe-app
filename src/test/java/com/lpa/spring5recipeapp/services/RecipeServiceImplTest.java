@@ -4,7 +4,6 @@ import com.lpa.spring5recipeapp.commands.RecipeCommand;
 import com.lpa.spring5recipeapp.converters.RecipeCommandToRecipe;
 import com.lpa.spring5recipeapp.converters.RecipeToRecipeCommand;
 import com.lpa.spring5recipeapp.domain.Recipe;
-import com.lpa.spring5recipeapp.exceptions.NotFoundException;
 import com.lpa.spring5recipeapp.repositories.reactive.RecipeReactiveRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +12,7 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

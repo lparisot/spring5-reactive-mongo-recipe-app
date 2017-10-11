@@ -1,7 +1,6 @@
 package com.lpa.spring5recipeapp.services;
 
 import com.lpa.spring5recipeapp.commands.IngredientCommand;
-import com.lpa.spring5recipeapp.commands.UnitOfMeasureCommand;
 import com.lpa.spring5recipeapp.converters.IngredientCommandToIngredient;
 import com.lpa.spring5recipeapp.converters.IngredientToIngredientCommand;
 import com.lpa.spring5recipeapp.converters.UnitOfMeasureCommandToUnitOfMeasure;
@@ -9,7 +8,6 @@ import com.lpa.spring5recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.lpa.spring5recipeapp.domain.Ingredient;
 import com.lpa.spring5recipeapp.domain.Recipe;
 import com.lpa.spring5recipeapp.domain.UnitOfMeasure;
-import com.lpa.spring5recipeapp.repositories.RecipeRepository;
 import com.lpa.spring5recipeapp.repositories.reactive.RecipeReactiveRepository;
 import com.lpa.spring5recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 import org.junit.Before;
@@ -17,8 +15,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
