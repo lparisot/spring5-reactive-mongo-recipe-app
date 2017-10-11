@@ -14,7 +14,6 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
-@Ignore
 @RunWith(SpringRunner.class)
 @DataMongoTest
 public class UnitOfMeasureRepositoryIT {
