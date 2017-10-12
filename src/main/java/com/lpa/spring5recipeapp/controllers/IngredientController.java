@@ -54,7 +54,7 @@ public class IngredientController {
                                          @PathVariable String ingredientId) {
         log.debug("Update ingredient " + ingredientId + " for recipe " + recipeId);
 
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId));
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId).block());
 
         model.addAttribute("uoms", unitOfMeasureService.listAllUoms());
 
@@ -62,7 +62,8 @@ public class IngredientController {
     }
 
     @PostMapping("/recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
+    public String saveOrUpdate(@ModelAttribute IngredientCommand command, @PathVariable String recipeId) {
+        command.setRecipeId(recipeId);
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
 
         log.debug("saved ingredient id:" + savedCommand.getId());

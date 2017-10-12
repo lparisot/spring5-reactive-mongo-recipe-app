@@ -157,12 +157,15 @@
                                         </ul>
                                         <div th:each="ingredientEach, idx : ${recipe.getIngredients()}" >
                                             <input type="hidden" th:field="*{ingredients[__${idx.index}__].id}" />
+                                            <input type="hidden" th:field="*{ingredients[__${idx.index}__].recipeId}" />
                                             <input type="hidden" th:field="*{ingredients[__${idx.index}__].description}" />
                                             <input type="hidden" th:field="*{ingredients[__${idx.index}__].amount}" />
                                             <input type="hidden" th:field="*{ingredients[__${idx.index}__].unitOfMeasure.id}" />
+                                            <input type="hidden" th:field="*{ingredients[__${idx.index}__].unitOfMeasure.description}" />
                                         </div>
                                         <div th:each="catEach, idx : ${recipe.getCategories()}" >
                                             <input type="hidden" th:field="*{categories[__${idx.index}__].id}" />
+                                            <input type="hidden" th:field="*{categories[__${idx.index}__].description}" />
                                         </div>
                                     </div>
                                 </div>
