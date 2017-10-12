@@ -3,6 +3,7 @@ package com.lpa.spring5recipeapp.controllers;
 import com.lpa.spring5recipeapp.config.WebConfig;
 import com.lpa.spring5recipeapp.domain.Recipe;
 import com.lpa.spring5recipeapp.services.RecipeService;
+import com.lpa.spring5recipeapp.services.UnitOfMeasureService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -20,13 +21,16 @@ public class RouterFunctionTest {
     @Mock
     private RecipeService recipeService;
 
+    @Mock
+    private UnitOfMeasureService unitOfMeasureService;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         WebConfig webConfig = new WebConfig();
 
-        RouterFunction<?> routerFunction = webConfig.recipes(recipeService);
+        RouterFunction<?> routerFunction = webConfig.routes(recipeService, unitOfMeasureService);
 
         webTestClient = WebTestClient.bindToRouterFunction(routerFunction).build();
 

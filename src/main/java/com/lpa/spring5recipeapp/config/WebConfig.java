@@ -16,20 +16,17 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class WebConfig {
     @Bean
-    public RouterFunction<?> recipes(RecipeService recipeService) {
-        return RouterFunctions.route(GET("/api/recipes"),
-                serverRequest -> ServerResponse
-                                    .ok()
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .body(recipeService.getRecipes(), Recipe.class));
-    }
-
-    @Bean
-    public RouterFunction<?> uoms(UnitOfMeasureService unitOfMeasureService) {
-        return RouterFunctions.route(GET("/api/uoms"),
-                serverRequest -> ServerResponse
-                        .ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(unitOfMeasureService.getUnitOfMeasures(), UnitOfMeasure.class));
+    public RouterFunction<?> routes(RecipeService recipeService, UnitOfMeasureService unitOfMeasureService) {
+        return RouterFunctions
+                    .route(GET("/api/recipes"),
+                        serverRequest -> ServerResponse
+                                            .ok()
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .body(recipeService.getRecipes(), Recipe.class))
+                .and(RouterFunctions.route(GET("/api/uoms"),
+                        serverRequest -> ServerResponse
+                                .ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(unitOfMeasureService.getUnitOfMeasures(), UnitOfMeasure.class)));
     }
 }
