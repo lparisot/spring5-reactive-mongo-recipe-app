@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 import java.util.UUID;
 
@@ -65,13 +66,11 @@ public class IngredientController {
 
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId).block());
 
-        model.addAttribute("uoms", unitOfMeasureService.listAllUoms());
-
         return RECIPE_INGREDIENTFORM_URL;
     }
 
     @PostMapping("/recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(Model model, @ModelAttribute("ingredient") IngredientCommand command, @PathVariable String recipeId) {
+    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand command) {
         webDataBinder.validate();
         BindingResult bindingResult = webDataBinder.getBindingResult();
         if(bindingResult.hasErrors()) {
@@ -79,19 +78,15 @@ public class IngredientController {
                 log.debug(objectError.toString());
             }));
 
-            model.addAttribute("ingredient", command);
-
-            model.addAttribute("uoms", unitOfMeasureService.listAllUoms());
-
             return RECIPE_INGREDIENTFORM_URL;
         }
 
-        command.setRecipeId(recipeId);
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
 
         log.debug("saved ingredient id:" + savedCommand.getId());
 
-        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+        //return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients";
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/new")
@@ -110,8 +105,6 @@ public class IngredientController {
 
         model.addAttribute("ingredient", ingredientCommand);
 
-        model.addAttribute("uoms", unitOfMeasureService.listAllUoms());
-
         return RECIPE_INGREDIENTFORM_URL;
     }
 
@@ -123,5 +116,10 @@ public class IngredientController {
         ingredientService.deleteById(recipeId, ingredientId).block();
 
         return "redirect:/recipe/" + recipeId + "/ingredients";
+    }
+
+    @ModelAttribute("uoms")
+    public Flux<UnitOfMeasureCommand> populateUnitOfMeasureList() {
+        return unitOfMeasureService.listAllUoms();
     }
 }
