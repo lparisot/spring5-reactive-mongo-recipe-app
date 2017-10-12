@@ -2,6 +2,7 @@ package com.lpa.spring5recipeapp.services;
 
 import com.lpa.spring5recipeapp.commands.UnitOfMeasureCommand;
 import com.lpa.spring5recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
+import com.lpa.spring5recipeapp.domain.UnitOfMeasure;
 import com.lpa.spring5recipeapp.repositories.reactive.UnitOfMeasureReactiveRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -22,9 +23,10 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
         return unitOfMeasureReactiveRepository
                 .findAll()
                 .map(unitOfMeasureToUnitOfMeasureCommand::convert);
-        /*return StreamSupport.stream(unitOfMeasureReactiveRepository.findAll()
-                .spliterator(), false)
-                .map(unitOfMeasureToUnitOfMeasureCommand::convert)
-                .collect(Collectors.toSet());*/
+    }
+
+    @Override
+    public Flux<UnitOfMeasure> getUnitOfMeasures() {
+        return unitOfMeasureReactiveRepository.findAll();
     }
 }
