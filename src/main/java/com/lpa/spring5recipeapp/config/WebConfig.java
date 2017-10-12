@@ -20,9 +20,9 @@ public class WebConfig {
         return RouterFunctions
                     .route(GET("/api/recipes"),
                         serverRequest -> ServerResponse
-                                            .ok()
-                                            .contentType(MediaType.APPLICATION_JSON)
-                                            .body(recipeService.getRecipes(), Recipe.class))
+                                .ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(recipeService.getRecipes(), Recipe.class))
                 .and(RouterFunctions.route(GET("/api/uoms"),
                         serverRequest -> ServerResponse
                                 .ok()
