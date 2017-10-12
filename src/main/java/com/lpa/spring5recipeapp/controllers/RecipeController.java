@@ -20,7 +20,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @InitBinder
+    @InitBinder("recipe")
     public void initBinder(WebDataBinder webDataBinder) {
         this.webDataBinder = webDataBinder;
     }
