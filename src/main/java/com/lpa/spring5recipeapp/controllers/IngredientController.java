@@ -43,7 +43,7 @@ public class IngredientController {
                                        @PathVariable String ingredientId) {
         log.debug("Getting ingredient " + ingredientId + " for recipe " + recipeId);
 
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId).block());
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId));
 
         return "recipe/ingredient/show";
     }
@@ -54,9 +54,9 @@ public class IngredientController {
                                          @PathVariable String ingredientId) {
         log.debug("Update ingredient " + ingredientId + " for recipe " + recipeId);
 
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId).block());
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId));
 
-        model.addAttribute("uoms", unitOfMeasureService.listAllUoms().collectList().block());
+        model.addAttribute("uoms", unitOfMeasureService.listAllUoms());
 
         return "recipe/ingredient/ingredientform";
     }
@@ -85,7 +85,7 @@ public class IngredientController {
 
         model.addAttribute("ingredient", ingredientCommand);
 
-        model.addAttribute("uoms", unitOfMeasureService.listAllUoms().collectList().block());
+        model.addAttribute("uoms", unitOfMeasureService.listAllUoms());
 
         return "recipe/ingredient/ingredientform";
     }
